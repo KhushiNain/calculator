@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import '../App.css'
 
 export default function Cal() {
+  const operators = ['+', '-', '*', '/'];
   const [input, setInput]= useState("")
   const [result, setResult]= useState("")
   const handleClick = (value) => {
     if (value === '=') {
       setResult(eval(input));
       setInput("")
-    } else if (value === 'DEL') {
+    } else if (value === 'AC') {
       setInput('');
       setResult('');
-    } else {
+    }
+    else if (value === 'DEL') {
+      setInput(input.slice(0, -1));
+    } 
+    else if (operators.includes(value) && operators.includes(input.slice(-1))) {    
+        setInput(input.slice(0, -1) + value);
+      }
+    else {
       if(result !=""){
         setResult("")
       }
